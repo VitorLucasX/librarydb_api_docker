@@ -1,0 +1,38 @@
+                                                    # COMANDOS DO DOCKER
+
+# Rodar container Postgre na versao 16.3
+docker run --name librarydb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=library postgres:16.3
+
+# Rodar Pgadmin 4
+docker run --name pgadmin4 -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=vitorlucasdev@gmail.com -e PGADMIN_DEFAULT_PASSWORD=132207 dpage/pgadmin4
+
+# Ver as imagens rodando
+docker ps
+
+# Parar container
+docker stop pgadmin4 (nome do container)
+
+# Startar container
+docker start pgadmin4 (nome do container)
+
+# Deletar um container
+docker container rm pgadmin4
+
+# Criar uma conexao entre dois containers, preciso criar uma rede (network) para isso.
+docker network create library-network (nome da rede)
+
+# Criar um container e usar a network, usa o mesmo comando lá de cima mas especifica o nome da rede no final.
+Exemplo:
+docker run --name librarydb -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=library
+--network library-network postgres:16.3
+
+# Mostra todos os servicos e portas do docker
+netstat -aof
+
+# Especificar um servico de uma porta
+netstat -aof findstr 5432
+
+
+
+
+

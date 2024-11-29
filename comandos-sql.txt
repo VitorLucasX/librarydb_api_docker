@@ -1,0 +1,27 @@
+CREATE TABLE autor (
+id uuid not null primary key,
+nome varchar(100) not null,
+data_nascimento date not null,
+nacionalidade varchar(50) not null
+)
+
+// CRIANDO TABELA LIVRO
+CREATE TABLE livro (
+id uuid not null primary key,
+isbn varchar(20) not null,
+titulo varchar(150) not null,
+data_publicacao date not null,
+genero varchar(30) not null,
+preco numeric(18,2),
+id_autor uuid not null references autor(id) #REFERENCIANDO A UUID DA TABELA AUTOR
+constraint chk_genero check (genero in ('FICCAO', 'FANTASIA', 'MISTERIO', 'ROMANCE',
+'BIOGRAFIA', 'CIENCIA')) #CRIANDO UM ENUM
+)
+
+SELECT * FROM autor;
+SELECT * FROM livro;
+
+// JUNTANDO O TITULO DO LIVRO COM O NOME DO AUTOR QUE ESCREVEU O LIVRO
+SELECT l.titulo as nome_livro, a.nome as nome_autor
+from livro as l
+join autor a on a.id = l.id_autor
