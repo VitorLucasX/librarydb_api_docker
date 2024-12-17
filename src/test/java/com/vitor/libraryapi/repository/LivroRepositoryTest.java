@@ -27,12 +27,12 @@ class LivroRepositoryTest {
         Livro livro = new Livro();
         livro.setIsbn("21746-25435");
         livro.setPreco(BigDecimal.valueOf(100));
-        livro.setGenero(Genero.FICCAO);
-        livro.setTitulo("UFO");
+        livro.setGenero(Genero.CIENCIA);
+        livro.setTitulo("Ciencias UFO");
         livro.setDataPublicacao(LocalDate.of(1980, 1, 2));
 
         Autor autor = autorRepository
-                .findById(UUID.fromString("06301151-ec2b-432c-9441-0e60cff18a05"))
+                .findById(UUID.fromString("41a9cfcf-1831-4baa-98ac-472be537abbe"))
                 .orElse(null);
 
         livro.setAutor(autor);
@@ -195,4 +195,13 @@ class LivroRepositoryTest {
         resultado.forEach(System.out::println);
     }
 
+    @Test
+    void deletarLivroPorGenero() {
+        repository.deleteByGenero(Genero.CIENCIA);
+    }
+
+    @Test
+    void atualizarDataLivro() {
+        repository.updateDataPublicacao(LocalDate.of(1950,03,01));
+    }
 }
